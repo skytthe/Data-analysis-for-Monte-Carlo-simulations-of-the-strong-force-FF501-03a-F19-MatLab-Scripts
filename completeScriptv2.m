@@ -74,8 +74,8 @@ ylabel('m_{eff}')
 % Computing line constants for 10 different intervals 11:36 - 20:45
 res = []
 for i = 1:size(c, 2)
-    for l = 1:15
-        interval = 7+l:32+l ;
+    for l = 1:10
+        interval = 5+l:30+l ;
         [b, a, chi] = linRegress(t(interval), y_log(interval, i));
         res(:, l, i) = [b, a, chi];
     end
@@ -96,18 +96,18 @@ E = mean(res_mean(1, :)) * -convFactor
 err_E = sqrt( (N-1)/N * sum( (E_0 - E_0m * ones(1, 2224)).^2, 2) );
 
 % Plots
-% figure(2)
-% plot(t, y_logm)
-% figure(3) 
-% plot(res_mean(1, :));
-% title('b')
-% figure(4) 
-% plot(res_mean(2, :));
-% title('a')
-% figure(5) 
-% plot(res_mean(3, :));
-% title('chi^2')
-% 
-% figure(6)
-% errorbar(t(1:63), E_0m, err_E) 
+figure(3)
+plot(t, y_logm)
+figure(4) 
+plot(res_mean(1, :));
+title('b')
+figure(5) 
+plot(res_mean(2, :));
+title('a')
+figure(6) 
+plot(res_mean(3, :));
+title('chi^2')
+
+figure(7)
+errorbar(t(1:63), E_0m, err_E) 
 
